@@ -27,4 +27,12 @@ export class OutagesService {
         outage.resolved = true;
         return this.outageRepository.save(outage)
     }
+
+    async remove(id: number): Promise<void>{
+        const outage = await this.outageRepository.findOneBy({id});
+        if(!outage){
+        throw new NotFoundException(`Outage with ID ${id} not found`);
+        }
+        await this.outageRepository.remove(outage)
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { OutagesService } from './outages.service';
 import { Outages } from './outages.entity';
 import { CreateOutageDto } from './dto/create-outage.dto';
@@ -20,5 +20,11 @@ export class OutagesController {
     @Patch(':id/resolve')
     resolve(@Param('id') id: string): Promise<Outages>{
         return this.outageService.resolve(+id)
+    }
+
+    @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    remove(@Param('id') id:string): Promise<void> {
+        return this.outageService.remove(+id);
     }
 }
