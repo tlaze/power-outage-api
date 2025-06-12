@@ -26,6 +26,9 @@ import { OutagesModule } from './outages/outages.module';
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
       synchronize: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
     OutagesModule,
   ],
